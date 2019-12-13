@@ -50,7 +50,7 @@ public class CategoryCount {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
-        env.setParallelism(5);
+        env.setParallelism(2);
 
         EnvironmentSettings settings = new EnvironmentSettings.Builder()
                 .inStreamingMode()
@@ -96,7 +96,7 @@ public class CategoryCount {
                         .field("rowtime", Types.SQL_TIMESTAMP)
                         .rowtime(new Rowtime()
                                 .timestampsFromField("ts")
-                                .watermarksPeriodicBounded(60000)))
+                                .watermarksPeriodicBounded(6000000)))
                 .inAppendMode()
                 .registerTableSource("source");
 
